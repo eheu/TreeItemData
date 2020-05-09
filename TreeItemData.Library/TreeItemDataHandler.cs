@@ -20,11 +20,14 @@ namespace TreeItemData.Library
 
         JToken GetDirectory(DirectoryInfo directory)
         {
-            return JToken.FromObject(new
-            {
-                directories = directory.EnumerateDirectories().ToDictionary(x => x.Name, x => GetDirectory(x)),
-                files = directory.EnumerateFiles().Select(x => x.Name).ToList()
-            });
+            return JToken.FromObject
+            (
+                new
+                {
+                    directories = directory.EnumerateDirectories().ToDictionary(x => x.Name, x => GetDirectory(x)),
+                    files = directory.EnumerateFiles().Select(x => x.Name).ToList()
+                }
+            );
         }
     }
 }
